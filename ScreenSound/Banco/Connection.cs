@@ -12,7 +12,7 @@ public class Connection
     {
         return new SqlConnection(connectionString);
     }
-    
+
     public IEnumerable<Artista> Listar()
     {
         var lista = new List<Artista>();
@@ -20,7 +20,7 @@ public class Connection
         connection.Open();
 
         string sql = "SELECT * FROM ARTISTAS";
-        SqlCommand command = new SqlCommand(sql, connection);  
+        SqlCommand command = new SqlCommand(sql, connection);
         using SqlDataReader dataReader = command.ExecuteReader();
         while (dataReader.Read())
         {

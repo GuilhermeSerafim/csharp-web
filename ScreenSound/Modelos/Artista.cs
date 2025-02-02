@@ -32,7 +32,8 @@ public class Artista
 
     public override string ToString()
     {
-        return $@"Id: {Id}
+        return $@"
+            Id: {Id}
             Nome: {Nome}
             Foto de Perfil: {FotoPerfil}
             Bio: {Bio}";
