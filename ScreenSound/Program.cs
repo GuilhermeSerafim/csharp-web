@@ -5,7 +5,6 @@ using ScreenSound.Modelos;
 try
 {
     var artistaDal = new ArtistaDAL();
-    artistaDal.Atualizar(new Artista("ZZ", "ABC"), 1002);
     var listaArtista = artistaDal.Listar();
     foreach (var artista in listaArtista)
     {
