@@ -4,7 +4,9 @@ using ScreenSound.Modelos;
 
 try
 {
-    var artistaDal = new ArtistaDAL();
+    var context = new ScreenSoundContext();
+    var artistaDal = new ArtistaDAL(context);
+    artistaDal.Adicionar(new Artista("Snoop Dogg", "Smoke everyday"));
     var listaArtista = artistaDal.Listar();
     foreach (var artista in listaArtista)
     {
