@@ -30,13 +30,18 @@ public class ArtistaDAL
 
     public void Atualizar(Artista artista)
     {
-        _context.Update(artista);
+        _context.Artistas.Update(artista);
         _context.SaveChanges();
     }
     public void Deletar(Artista artista)
     {
-        _context.Remove(artista);
+        _context.Artistas.Remove(artista);
         _context.SaveChanges();
+    }
+
+    public Artista? RecuperarPeloNome(string nomeArtista)
+    {
+        return _context.Artistas.FirstOrDefault(a => a.Nome.Equals(nomeArtista));
     }
  
 }

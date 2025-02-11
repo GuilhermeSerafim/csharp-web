@@ -2,30 +2,8 @@
 using ScreenSound.Menus;
 using ScreenSound.Modelos;
 
-try
-{
-    var context = new ScreenSoundContext();
-    var artistaDal = new ArtistaDAL(context);
-    var artistaAhserExcluido = new Artista("Snoop Dogg", "Smoke everyday") { Id = 2 };
-    artistaDal.Deletar(artistaAhserExcluido);
-    var listaArtista = artistaDal.Listar();
-    foreach (var artista in listaArtista)
-    {
-        Console.WriteLine(artista.ToString());
-    }
-}
-catch (Exception ex)
-{
-    Console.WriteLine(ex.Message);
-}
-return;
-
-Artista ira = new Artista("Ira!", "Banda Ira!");
-Artista beatles = new("The Beatles", "Banda The Beatles");
-
-Dictionary<string, Artista> artistasRegistrados = new();
-artistasRegistrados.Add(ira.Nome, ira);
-artistasRegistrados.Add(beatles.Nome, beatles);
+var context = new ScreenSoundContext();
+var artistaDAL = new ArtistaDAL(context);
 
 Dictionary<int, Menu> opcoes = new();
 opcoes.Add(1, new MenuRegistrarArtista());
@@ -64,7 +42,7 @@ void ExibirOpcoesDoMenu()
     if (opcoes.ContainsKey(opcaoEscolhidaNumerica))
     {
         Menu menuASerExibido = opcoes[opcaoEscolhidaNumerica];
-        menuASerExibido.Executar(artistasRegistrados);
+        menuASerExibido.Executar(artistaDAL);
         if (opcaoEscolhidaNumerica > 0) ExibirOpcoesDoMenu();
     }
     else
