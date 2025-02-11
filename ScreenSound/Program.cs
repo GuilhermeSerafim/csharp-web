@@ -6,12 +6,8 @@ try
 {
     var context = new ScreenSoundContext();
     var artistaDal = new ArtistaDAL(context);
-    artistaDal.Atualizar(new Artista(
-        "ABC", "Artista Atualizado"
-        )
-    {
-        Id = 1
-    });
+    var artistaAhserExcluido = new Artista("Snoop Dogg", "Smoke everyday") { Id = 2 };
+    artistaDal.Deletar(artistaAhserExcluido);
     var listaArtista = artistaDal.Listar();
     foreach (var artista in listaArtista)
     {
