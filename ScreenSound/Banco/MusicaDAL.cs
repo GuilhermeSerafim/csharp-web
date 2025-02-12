@@ -7,7 +7,7 @@ using ScreenSound.Modelos;
 
 namespace ScreenSound.Banco;
 
-public class MusicaDAL
+public class MusicaDAL : DAL<Musica>
 {
     private readonly ScreenSoundContext _context;
 
@@ -16,21 +16,31 @@ public class MusicaDAL
         _context = context;
     }
 
-    public IEnumerable<Musica> Listar()
+    public override IEnumerable<Musica> Listar()
     {
         return new List<Musica>();
     }
 
-    public void Adicionar(Musica musica)
+    public override void Adicionar(Musica musica)
     {
         _context.Musica.Add(musica);
         _context.SaveChanges();
     }
 
-    public void Deletar(Musica musica)
+    public override void Deletar(Musica musica)
     {
         _context.Musica.Remove(musica);
         _context.SaveChanges();
     }
 
+    public override Musica? RecuperarPeloNome(string nome)
+    {
+        return _context.Musica.FirstOrDefault(m => m.Equals(nome));
+    }
+
+    public override void Atualizar(Musica msc)
+    {
+        _context.Musica.Update(msc);
+        _context.SaveChanges();
+    }
 }
