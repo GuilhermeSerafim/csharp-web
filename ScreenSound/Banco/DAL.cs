@@ -1,4 +1,5 @@
-﻿using ScreenSound.Modelos;
+﻿using Microsoft.EntityFrameworkCore;
+using ScreenSound.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,34 @@ using System.Threading.Tasks;
 
 namespace ScreenSound.Banco;
 
-public abstract class DAL<T> // T -> Tipo generico
+public abstract class DAL<T> where T : class // T -> Tipo generico classe
 {
-    public abstract IEnumerable<T> Listar();
-    public abstract void Adicionar(T obj);
-    public abstract void Atualizar(T obj);
-    public abstract void Deletar(T obj);
-    public abstract T? RecuperarPeloNome(string nome);
+    public readonly ScreenSoundContext _context;
+
+    protected DAL(ScreenSoundContext context)
+    {
+        _context = context;
+    }
+
+    public IEnumerable<T> Listar()
+    {
+        // Quando você chama _context.Set<T>(), ele retorna um objeto do tipo DbSet<T>,
+        // que representa uma tabela do banco de dados dentro do contexto.
+        return _context.Set<T>().ToList();
+    }
+    public void Adicionar(T obj)
+    {
+        _context.Set<T>().Add(obj);
+        _context.SaveChanges();
+    }
+    public void Atualizar(T obj)
+    {
+        _context.Set<T>().Update(obj);
+        _context.SaveChanges();
+    }
+    public void Deletar(T obj)
+    {
+        _context.Set<T>().Remove(obj);
+        _context.SaveChanges();
+    }
 }
